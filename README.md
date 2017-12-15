@@ -15,8 +15,18 @@
 ## Questions - Self Study - You can exercise your Google-Fu for this and any other _Sprint Challenge_ in the future.
 
 1. Describe Middleware, Sessions (as we know them in express), bcrypt and JWT.
+   There are two types of middleware, the normal kind and higher order. Higher order is used as a server.use so that it is global middleware. The normal kind of middleware is basically a function that you write and have do whatever you want, but the main point is that it runs within a server request, but before it actually performs the request. For example you could have a server.get that shows all users in a database, but you can set an authenticate middleware that would run and check if your authenticated BEFORE it runs the remainder of the server.get.
+
 1. What does bcrypt do in order to prevent attacks?
+   Bcrypt allows one way encryption of passwords, and the ability to easily check and compare plain text passwords to see if they match the encrypted password thats stored in the database. This makes it so the plaintext password is never sent leaving the ability to sniff or hack much harder. Bcrypt also allows you to add a salt to the encrypted password making it that much harder to hack using techniques such as a rainbow table and bruteforce attack. You are also able to add rounds which basically add time between hash attemps. Changing the rounds could change it from 1 attempt per 1ms up to or more than 500ms per attempt which in the long run could add years to the time it would take to hack a password.
+
 1. What are the three parts of the JSON Web Token?
+   A JWT is broken down into 3 parts including the Header, payload, and Signature. It would be displayed in the Dev tools as
+   XXXXXX.YYYYYYY.ZZZZZZZZZ
+   HEADER.PAYLOAD.SIGNATURE
+   Header - Usually contains the type of token (JWT) and the hashing type.
+   Paypload - Contains claims which are statements about an entity, usually the user, and other metadata.
+   Signature - The signature takes care of encoding it all so its easily readable in HTTP. You take the encoded header, the encoded paypload, a secret, and the algorithm specified in the header and sign it all.
 
 ## Project Description - User Management System - Jokes On YoU!
 
